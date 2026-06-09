@@ -336,6 +336,111 @@
                         </div>
                     </div>
 
+                    <!-- Reviews & Ratings Accordion -->
+                    <div class="border-b border-brand-section pb-4">
+                        <button type="button" class="w-full flex justify-between items-center py-4 group cursor-pointer"
+                            onclick="toggleAccordion('reviews-content', this)">
+                            <div class="flex items-center gap-4">
+                                <h2
+                                    class="font-sans text-brand-cream text-xl uppercase tracking-h2 group-hover:text-brand-accent transition-colors">
+                                    Đánh giá khách hàng</h2>
+                                <!-- Desktop Overall Rating -->
+                                <div class="hidden md:flex items-center gap-1.5 bg-brand-green/20 px-3 py-1 rounded">
+                                    <i class="ph-fill ph-star text-brand-accent text-sm"></i>
+                                    <span class="text-brand-accent text-[13px] font-medium tracking-wide">4.9/5</span>
+                                    <span class="text-brand-body text-[12px] font-light ml-1">| Hơn 1,200 lượt đặt
+                                        tour</span>
+                                </div>
+                            </div>
+                            <i
+                                class="ph ph-caret-up text-brand-accent text-xl transition-transform duration-300 transform rotate-0"></i>
+                        </button>
+                        <div id="reviews-content" class="accordion-content opacity-100" style="max-height: 800px;">
+                            <div class="pb-6 pt-2">
+                                <!-- Mobile Overall Rating -->
+                                <div
+                                    class="md:hidden flex items-center gap-1.5 mb-6 bg-brand-green/20 px-3 py-1.5 rounded inline-flex">
+                                    <i class="ph-fill ph-star text-brand-accent text-sm"></i>
+                                    <span class="text-brand-accent text-[13px] font-medium">4.9/5</span>
+                                    <span class="text-brand-body text-[12px] font-light ml-1">| 1,200+ lượt đặt</span>
+                                </div>
+
+                                <div class="space-y-4">
+                                    <!-- Review Item 1 -->
+                                    <div
+                                        class="bg-brand-black/50 p-5 rounded border border-brand-green/20 hover:border-brand-green/50 transition-colors">
+                                        <div class="flex justify-between items-start mb-3">
+                                            <div>
+                                                <h4 class="text-brand-cream font-medium text-[14px]">Nguyễn Trần Trung
+                                                    Quân</h4>
+                                                <span class="text-brand-body/60 text-[11px]">Tham gia ngày:
+                                                    15/05/2026</span>
+                                            </div>
+                                            <div class="flex gap-0.5 text-brand-accent text-[13px]">
+                                                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                                    class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                                    class="ph-fill ph-star"></i>
+                                            </div>
+                                        </div>
+                                        <p class="text-[13px] text-brand-body font-light leading-[1.7]">"Một trải nghiệm
+                                            thực sự đẳng cấp tại Hạ Long. Không gian hầm ủ sồi rất tĩnh lặng và có mùi
+                                            hương đặc trưng. Phần Tasting 3 loại rum cuối giờ rất ấn tượng, đặc biệt là
+                                            chai Spiced Rum. HDV giới thiệu cực kỳ có tâm."</p>
+                                    </div>
+
+                                    <!-- Review Item 2 -->
+                                    <div
+                                        class="bg-brand-black/50 p-5 rounded border border-brand-green/20 hover:border-brand-green/50 transition-colors">
+                                        <div class="flex justify-between items-start mb-3">
+                                            <div>
+                                                <h4 class="text-brand-cream font-medium text-[14px]">Elena R. (UK)</h4>
+                                                <span class="text-brand-body/60 text-[11px]">Tham gia ngày:
+                                                    02/06/2026</span>
+                                            </div>
+                                            <div class="flex gap-0.5 text-brand-accent text-[13px]">
+                                                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                                    class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                                    class="ph-fill ph-star-half"></i>
+                                            </div>
+                                        </div>
+                                        <p class="text-[13px] text-brand-body font-light leading-[1.7]">"Amazing
+                                            distillery tour! I've visited many distilleries around the world, but the
+                                            way HaLong Rum incorporates local Vietnamese ingredients is unique. The
+                                            copper stills are beautiful. Highly recommend if you visit Ha Long."</p>
+                                    </div>
+
+                                    <!-- Review Item 3 -->
+                                    <div
+                                        class="bg-brand-black/50 p-5 rounded border border-brand-green/20 hover:border-brand-green/50 transition-colors">
+                                        <div class="flex justify-between items-start mb-3">
+                                            <div>
+                                                <h4 class="text-brand-cream font-medium text-[14px]">Lê Phương Thảo</h4>
+                                                <span class="text-brand-body/60 text-[11px]">Tham gia ngày:
+                                                    28/05/2026</span>
+                                            </div>
+                                            <div class="flex gap-0.5 text-brand-accent text-[13px]">
+                                                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                                    class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                                    class="ph-fill ph-star"></i>
+                                            </div>
+                                        </div>
+                                        <p class="text-[13px] text-brand-body font-light leading-[1.7]">"Quà tặng ly
+                                            tasting mang về rất xinh. Vợ chồng mình đã có một buổi chiều rất chill tại
+                                            nhà máy. Bạn nào đến Hạ Long ngoài đi vịnh thì nên ghé đây để đổi gió nhé,
+                                            dịch vụ cực kỳ chỉn chu!"</p>
+                                    </div>
+                                </div>
+
+                                <div class="mt-6 text-center">
+                                    <button
+                                        class="text-brand-accent text-[12px] uppercase tracking-label font-medium hover:text-brand-cream transition-colors flex items-center justify-center gap-2 mx-auto">
+                                        Xem thêm 128 đánh giá <i class="ph ph-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Important Notes Accordion -->
                     <div class="border-b border-brand-section pb-4">
                         <button type="button" class="w-full flex justify-between items-center py-4 group cursor-pointer"
