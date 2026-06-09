@@ -524,7 +524,7 @@
                 <!-- Left: Checkout Form -->
                 <div class="lg:col-span-7 space-y-8">
                     <form id="checkoutDataForm" onsubmit="processCheckout(event)">
-                        <!-- Thông tin khách hàng -->
+                        <!-- Thông tin khách hàng & VAT -->
                         <div class="bg-brand-section p-8 border border-brand-green/20 mb-8">
                             <h2
                                 class="font-sans text-brand-cream text-lg uppercase tracking-h2 mb-6 border-b border-brand-green/20 pb-4">
@@ -563,6 +563,48 @@
                                     <textarea id="cusNote"
                                         class="w-full input-dark p-3 text-[14px] font-light h-24 resize-none"
                                         placeholder="Không bắt buộc"></textarea>
+                                </div>
+
+                                <!-- VAT Request Section -->
+                                <div class="mt-8 border-t border-brand-green/20 pt-6">
+                                    <label class="flex items-center gap-3 cursor-pointer group">
+                                        <input type="checkbox" id="reqVatToggle" onchange="toggleVatForm()"
+                                            class="w-4 h-4 text-brand-accent bg-transparent border-brand-body rounded focus:ring-brand-accent">
+                                        <span
+                                            class="text-[14px] font-medium text-brand-cream group-hover:text-brand-accent transition-colors">Yêu
+                                            cầu xuất hóa đơn VAT (Hóa đơn điện tử)</span>
+                                    </label>
+
+                                    <!-- VAT Details Form (Hidden initially) -->
+                                    <div id="vatFormSection"
+                                        class="hidden mt-5 space-y-4 bg-[#121A10] p-5 border border-brand-green/30 rounded">
+                                        <div>
+                                            <label
+                                                class="block text-[11px] font-medium uppercase tracking-label text-brand-cream mb-2">Tên
+                                                công ty *</label>
+                                            <input type="text" id="vatCompanyName"
+                                                class="w-full input-dark p-3 text-[14px] font-light"
+                                                placeholder="Nhập tên công ty">
+                                        </div>
+                                        <div>
+                                            <label
+                                                class="block text-[11px] font-medium uppercase tracking-label text-brand-cream mb-2">Mã
+                                                số thuế *</label>
+                                            <input type="text" id="vatTaxCode"
+                                                class="w-full input-dark p-3 text-[14px] font-light"
+                                                placeholder="Nhập mã số thuế">
+                                        </div>
+                                        <div>
+                                            <label
+                                                class="block text-[11px] font-medium uppercase tracking-label text-brand-cream mb-2">Địa
+                                                chỉ công ty *</label>
+                                            <input type="text" id="vatAddress"
+                                                class="w-full input-dark p-3 text-[14px] font-light"
+                                                placeholder="Nhập địa chỉ công ty trên ĐKKD">
+                                        </div>
+                                        <p class="text-[11px] text-brand-body italic mt-2">* Thông tin hóa đơn sẽ được
+                                            gửi kèm trong email xác nhận sau khi thanh toán.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -771,7 +813,8 @@
                             thuật chưng cất và tinh thần Việt Nam của bạn đã được xác nhận thành công.</p>
 
                         <div class="bg-gray-100 p-4 rounded mt-4 mb-4 border-l-4 border-brand-accent">
-                            <h3 class="font-bold mb-2 uppercase text-[12px] tracking-wider">Thông tin chuyến đi</h3>
+                            <h3 class="font-bold mb-2 uppercase text-[12px] tracking-wider text-gray-700">Thông tin
+                                chuyến đi</h3>
                             <ul class="space-y-1">
                                 <li><strong>Mã vé:</strong> <span id="emlCusCodeIn"
                                         class="font-mono font-bold text-brand-green"></span></li>
@@ -780,6 +823,19 @@
                                 <li><strong>Số khách:</strong> <span id="emlCusGuests"></span> người</li>
                                 <li><strong>Địa điểm:</strong> Nhà máy HaLong Rum, Khu Công Nghiệp Cái Lân, TP Hạ Long.
                                 </li>
+                            </ul>
+                        </div>
+
+                        <!-- VAT Details for Customer Email (Hidden by default) -->
+                        <div id="emlCusVatSection"
+                            class="bg-gray-100 p-4 rounded mt-4 mb-4 border-l-4 border-gray-400 hidden">
+                            <h3 class="font-bold mb-2 uppercase text-[12px] tracking-wider text-gray-700">Thông tin xuất
+                                hóa đơn VAT</h3>
+                            <ul class="space-y-1 text-gray-700">
+                                <li><strong>Công ty:</strong> <span id="emlCusVatName"></span></li>
+                                <li><strong>Mã số thuế:</strong> <span id="emlCusVatTax"
+                                        class="font-mono font-medium"></span></li>
+                                <li><strong>Địa chỉ:</strong> <span id="emlCusVatAddress"></span></li>
                             </ul>
                         </div>
 
@@ -843,16 +899,37 @@
                                     <th class="py-2 text-brand-body font-medium">Ghi chú:</th>
                                     <td class="py-2 italic text-yellow-500"><span id="emlAdmNote"></span></td>
                                 </tr>
-                                <tr>
+                                <tr class="border-b border-brand-green/20">
                                     <th class="py-2 text-brand-body font-medium">Tổng thu:</th>
                                     <td class="py-2 font-bold text-green-400"><span id="emlAdmTotal"></span> (Đã thanh
                                         toán)</td>
                                 </tr>
                             </tbody>
+
+                            <!-- VAT Details for Admin Email (Hidden by default) -->
+                            <tbody id="emlAdmVatSection" class="hidden">
+                                <tr>
+                                    <td colspan="2" class="pt-4 pb-2"><span
+                                            class="text-brand-accent text-[11px] uppercase tracking-label font-bold bg-brand-green/20 px-2 py-1 rounded">Yêu
+                                            cầu xuất VAT</span></td>
+                                </tr>
+                                <tr class="border-b border-brand-green/20">
+                                    <th class="py-2 text-brand-body font-medium">Tên công ty:</th>
+                                    <td class="py-2 text-white"><span id="emlAdmVatName"></span></td>
+                                </tr>
+                                <tr class="border-b border-brand-green/20">
+                                    <th class="py-2 text-brand-body font-medium">Mã số thuế:</th>
+                                    <td class="py-2 font-mono text-white"><span id="emlAdmVatTax"></span></td>
+                                </tr>
+                                <tr class="border-b border-brand-green/20">
+                                    <th class="py-2 text-brand-body font-medium">Địa chỉ:</th>
+                                    <td class="py-2 text-white"><span id="emlAdmVatAddress"></span></td>
+                                </tr>
+                            </tbody>
                         </table>
 
                         <div
-                            class="bg-[#0B0C09] p-3 text-center border border-brand-green/30 rounded text-[12px] text-brand-body">
+                            class="bg-[#0B0C09] p-3 text-center border border-brand-green/30 rounded text-[12px] text-brand-body mt-6">
                             Action required: Vui lòng bộ phận lễ tân chuẩn bị <span id="emlAdmGift"></span> ly Tasting
                             khắc logo để làm quà tặng.
                         </div>
@@ -898,7 +975,13 @@
             name: "",
             phone: "",
             email: "",
-            note: ""
+            note: "",
+            vat: {
+                requested: false,
+                companyName: "",
+                taxCode: "",
+                address: ""
+            }
         };
 
         let currentBookingCode = "";
@@ -1053,6 +1136,21 @@
             showView('view-checkout');
         }
 
+        // --- TOGGLE VAT FORM ---
+        function toggleVatForm() {
+            const isChecked = document.getElementById('reqVatToggle').checked;
+            const vatForm = document.getElementById('vatFormSection');
+            const inputs = vatForm.querySelectorAll('input');
+
+            if (isChecked) {
+                vatForm.classList.remove('hidden');
+                inputs.forEach(input => input.setAttribute('required', 'true'));
+            } else {
+                vatForm.classList.add('hidden');
+                inputs.forEach(input => input.removeAttribute('required'));
+            }
+        }
+
         // --- 4. GO TO PAYMENT (QR CODE) ---
         function processCheckout(e) {
             e.preventDefault();
@@ -1062,6 +1160,14 @@
             customerData.phone = document.getElementById('cusPhone').value;
             customerData.email = document.getElementById('cusEmail').value;
             customerData.note = document.getElementById('cusNote').value || "Không có";
+
+            // Lưu dữ liệu VAT
+            customerData.vat.requested = document.getElementById('reqVatToggle').checked;
+            if (customerData.vat.requested) {
+                customerData.vat.companyName = document.getElementById('vatCompanyName').value;
+                customerData.vat.taxCode = document.getElementById('vatTaxCode').value;
+                customerData.vat.address = document.getElementById('vatAddress').value;
+            }
 
             // Sinh mã đặt chỗ mới
             currentBookingCode = generateBookingCode();
@@ -1092,6 +1198,17 @@
             document.getElementById('emlCusTime').innerText = bookingData.timeStr;
             document.getElementById('emlCusGuests').innerText = bookingData.guests;
 
+            // Xử lý hiển thị VAT trong Email Khách Hàng
+            const cusVatSection = document.getElementById('emlCusVatSection');
+            if (customerData.vat.requested) {
+                cusVatSection.classList.remove('hidden');
+                document.getElementById('emlCusVatName').innerText = customerData.vat.companyName;
+                document.getElementById('emlCusVatTax').innerText = customerData.vat.taxCode;
+                document.getElementById('emlCusVatAddress').innerText = customerData.vat.address;
+            } else {
+                cusVatSection.classList.add('hidden');
+            }
+
             // Điền Data vào Mẫu Email Quản Lý
             document.getElementById('emlAdmDateTitle').innerText = bookingData.dateStr;
             document.getElementById('emlAdmCode').innerText = currentBookingCode;
@@ -1104,6 +1221,17 @@
             document.getElementById('emlAdmNote').innerText = customerData.note;
             document.getElementById('emlAdmTotal').innerText = formatMoney(bookingData.totalPrice);
             document.getElementById('emlAdmGift').innerText = bookingData.guests;
+
+            // Xử lý hiển thị VAT trong Email Quản Lý
+            const admVatSection = document.getElementById('emlAdmVatSection');
+            if (customerData.vat.requested) {
+                admVatSection.classList.remove('hidden');
+                document.getElementById('emlAdmVatName').innerText = customerData.vat.companyName;
+                document.getElementById('emlAdmVatTax').innerText = customerData.vat.taxCode;
+                document.getElementById('emlAdmVatAddress').innerText = customerData.vat.address;
+            } else {
+                admVatSection.classList.add('hidden');
+            }
 
             showView('view-success');
         }
