@@ -1040,16 +1040,25 @@
             const calendarDays = document.getElementById('calendarDays');
             monthYearText.innerText = `${monthNames[currentMonth]} ${currentYear}`;
             calendarDays.innerHTML = '';
+
             const firstDay = new Date(currentYear, currentMonth, 1).getDay();
             const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+            // Thiết lập mốc 'today' để chặn đặt trong ngày
             const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
             for (let i = 0; i < firstDay; i++) calendarDays.innerHTML += `<div></div>`;
             for (let i = 1; i <= daysInMonth; i++) {
                 const cellDate = new Date(currentYear, currentMonth, i);
-                const isPast = cellDate < new Date(today.setHours(0, 0, 0, 0));
+
+                // Vô hiệu hóa ngày hiện tại và các ngày trước đó
+                const isDisabled = cellDate <= today;
+
                 let isSelected = selectedDateObj && cellDate.getTime() === selectedDateObj.getTime();
-                let classes = `calendar-day py-2 flex items-center justify-center rounded cursor-pointer ${isPast ? 'disabled' : ''} ${isSelected ? 'selected' : 'text-brand-cream'}`;
-                let clickEvent = isPast ? '' : `onclick="selectDate(${i})"`;
+                let classes = `calendar-day py-2 flex items-center justify-center rounded cursor-pointer ${isDisabled ? 'disabled' : ''} ${isSelected ? 'selected' : 'text-brand-cream'}`;
+                let clickEvent = isDisabled ? '' : `onclick="selectDate(${i})"`;
+
                 calendarDays.innerHTML += `<div class="${classes}" ${clickEvent}>${i}</div>`;
             }
         }
