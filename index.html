@@ -85,7 +85,7 @@
             transition: all 0.2s ease;
         }
 
-        .calendar-day:hover:not(.disabled):not(.selected) {
+        .calendar-day:hover:not(.disabled):not(.selected):not(.today) {
             background-color: rgba(57, 83, 39, 0.4);
             color: #F0EBE1;
         }
@@ -99,6 +99,13 @@
         .calendar-day.disabled {
             opacity: 0.3;
             cursor: not-allowed;
+        }
+
+        .calendar-day.today {
+            opacity: 0.8 !important;
+            /* Ghi đè opacity của disabled để dễ nhìn hơn */
+            border: 1px solid #C6A96B;
+            color: #C6A96B;
         }
 
         .time-slot {
@@ -1044,7 +1051,7 @@
             const firstDay = new Date(currentYear, currentMonth, 1).getDay();
             const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
-            // Thiết lập mốc 'today' để chặn đặt trong ngày
+            // Thiết lập mốc 'today'
             const today = new Date();
             today.setHours(0, 0, 0, 0);
 
@@ -1052,11 +1059,29 @@
             for (let i = 1; i <= daysInMonth; i++) {
                 const cellDate = new Date(currentYear, currentMonth, i);
 
+                // Kiểm tra xem cellDate có phải là ngày hôm nay hay không
+                const isToday = cellDate.getTime() === today.getTime();
+
                 // Vô hiệu hóa ngày hiện tại và các ngày trước đó
                 const isDisabled = cellDate <= today;
 
                 let isSelected = selectedDateObj && cellDate.getTime() === selectedDateObj.getTime();
-                let classes = `calendar-day py-2 flex items-center justify-center rounded cursor-pointer ${isDisabled ? 'disabled' : ''} ${isSelected ? 'selected' : 'text-brand-cream'}`;
+
+                let baseClasses = "calendar-day py-2 flex items-center justify-center rounded cursor-pointer transition-all";
+                let stateClasses = "";
+
+                if (isSelected) {
+                    stateClasses = " bg-brand-accent text-brand-black font-medium selected";
+                } else if (isToday) {
+                    // Highlight today with border and accent color, but keep it unclickable
+                    stateClasses = " border border-brand-accent text-brand-accent opacity-80 cursor-not-allowed disabled today";
+                } else if (isDisabled) {
+                    stateClasses = " opacity-30 cursor-not-allowed text-brand-cream disabled";
+                } else {
+                    stateClasses = " text-brand-cream hover:bg-brand-green/40";
+                }
+
+                let classes = baseClasses + stateClasses;
                 let clickEvent = isDisabled ? '' : `onclick="selectDate(${i})"`;
 
                 calendarDays.innerHTML += `<div class="${classes}" ${clickEvent}>${i}</div>`;
