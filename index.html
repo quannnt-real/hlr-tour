@@ -139,6 +139,27 @@
                 transform: translateY(0);
             }
         }
+
+        /* Modal Transitions */
+        .modal-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal-overlay.show .modal-content {
+            transform: translateY(0) scale(1);
+        }
     </style>
 </head>
 
@@ -371,8 +392,14 @@
                                         class="bg-brand-black/50 p-5 rounded border border-brand-green/20 hover:border-brand-green/50 transition-colors">
                                         <div class="flex justify-between items-start mb-3">
                                             <div>
-                                                <h4 class="text-brand-cream font-medium text-[14px]">Nguyễn Trần Trung
-                                                    Quân</h4>
+                                                <div class="flex items-center gap-2">
+                                                    <h4 class="text-brand-cream font-medium text-[14px]">Nguyễn Trần
+                                                        Trung Quân</h4>
+                                                    <span
+                                                        class="flex items-center gap-1 text-[9px] text-brand-accent border border-brand-accent/50 px-1.5 py-0.5 rounded uppercase tracking-wider">
+                                                        <i class="ph-fill ph-seal-check"></i> Đã xác thực
+                                                    </span>
+                                                </div>
                                                 <span class="text-brand-body/60 text-[11px]">Tham gia ngày:
                                                     15/05/2026</span>
                                             </div>
@@ -393,7 +420,14 @@
                                         class="bg-brand-black/50 p-5 rounded border border-brand-green/20 hover:border-brand-green/50 transition-colors">
                                         <div class="flex justify-between items-start mb-3">
                                             <div>
-                                                <h4 class="text-brand-cream font-medium text-[14px]">Elena R. (UK)</h4>
+                                                <div class="flex items-center gap-2">
+                                                    <h4 class="text-brand-cream font-medium text-[14px]">Elena R. (UK)
+                                                    </h4>
+                                                    <span
+                                                        class="flex items-center gap-1 text-[9px] text-brand-accent border border-brand-accent/50 px-1.5 py-0.5 rounded uppercase tracking-wider">
+                                                        <i class="ph-fill ph-seal-check"></i> Đã xác thực
+                                                    </span>
+                                                </div>
                                                 <span class="text-brand-body/60 text-[11px]">Tham gia ngày:
                                                     02/06/2026</span>
                                             </div>
@@ -414,7 +448,14 @@
                                         class="bg-brand-black/50 p-5 rounded border border-brand-green/20 hover:border-brand-green/50 transition-colors">
                                         <div class="flex justify-between items-start mb-3">
                                             <div>
-                                                <h4 class="text-brand-cream font-medium text-[14px]">Lê Phương Thảo</h4>
+                                                <div class="flex items-center gap-2">
+                                                    <h4 class="text-brand-cream font-medium text-[14px]">Lê Phương Thảo
+                                                    </h4>
+                                                    <span
+                                                        class="flex items-center gap-1 text-[9px] text-brand-accent border border-brand-accent/50 px-1.5 py-0.5 rounded uppercase tracking-wider">
+                                                        <i class="ph-fill ph-seal-check"></i> Đã xác thực
+                                                    </span>
+                                                </div>
                                                 <span class="text-brand-body/60 text-[11px]">Tham gia ngày:
                                                     28/05/2026</span>
                                             </div>
@@ -432,7 +473,7 @@
                                 </div>
 
                                 <div class="mt-6 text-center">
-                                    <button
+                                    <button onclick="openReviewsModal()"
                                         class="text-brand-accent text-[12px] uppercase tracking-label font-medium hover:text-brand-cream transition-colors flex items-center justify-center gap-2 mx-auto">
                                         Xem thêm 128 đánh giá <i class="ph ph-arrow-right"></i>
                                     </button>
@@ -1060,6 +1101,162 @@
         </div>
     </footer>
 
+    <!-- ================= MODAL: TẤT CẢ ĐÁNH GIÁ ================= -->
+    <div id="reviewsModal"
+        class="modal-overlay fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div
+            class="modal-content bg-brand-section border border-brand-green/30 w-full max-w-2xl max-h-[85vh] rounded-lg shadow-2xl flex flex-col">
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center p-6 border-b border-brand-green/20">
+                <div>
+                    <h3 class="font-serif text-brand-cream text-2xl">Đánh giá khách hàng</h3>
+                    <div class="flex items-center gap-1.5 mt-2">
+                        <i class="ph-fill ph-star text-brand-accent text-sm"></i>
+                        <span class="text-brand-accent text-[14px] font-medium tracking-wide">4.9/5</span>
+                        <span class="text-brand-body text-[13px] font-light ml-1">Dựa trên 128 đánh giá đã xác
+                            thực</span>
+                    </div>
+                </div>
+                <button onclick="closeReviewsModal()"
+                    class="text-brand-body hover:text-brand-accent transition-colors p-2">
+                    <i class="ph ph-x text-2xl"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body (Scrollable) -->
+            <div class="p-6 overflow-y-auto custom-scrollbar space-y-4">
+
+                <!-- Review 1 -->
+                <div class="bg-brand-black/40 p-5 rounded border border-brand-green/20">
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h4 class="text-brand-cream font-medium text-[14px]">Nguyễn Trần Trung Quân</h4>
+                                <span
+                                    class="flex items-center gap-1 text-[9px] text-brand-accent border border-brand-accent/50 px-1.5 py-0.5 rounded uppercase tracking-wider">
+                                    <i class="ph-fill ph-seal-check"></i> Đã xác thực
+                                </span>
+                            </div>
+                            <span class="text-brand-body/60 text-[11px]">Tham gia ngày: 15/05/2026</span>
+                        </div>
+                        <div class="flex gap-0.5 text-brand-accent text-[13px]">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                class="ph-fill ph-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-[13px] text-brand-body font-light leading-[1.7]">"Một trải nghiệm thực sự đẳng cấp
+                        tại Hạ Long. Không gian hầm ủ sồi rất tĩnh lặng và có mùi hương đặc trưng. Phần Tasting 3 loại
+                        rum cuối giờ rất ấn tượng, đặc biệt là chai Spiced Rum. HDV giới thiệu cực kỳ có tâm."</p>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-brand-black/40 p-5 rounded border border-brand-green/20">
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h4 class="text-brand-cream font-medium text-[14px]">Elena R. (UK)</h4>
+                                <span
+                                    class="flex items-center gap-1 text-[9px] text-brand-accent border border-brand-accent/50 px-1.5 py-0.5 rounded uppercase tracking-wider">
+                                    <i class="ph-fill ph-seal-check"></i> Đã xác thực
+                                </span>
+                            </div>
+                            <span class="text-brand-body/60 text-[11px]">Tham gia ngày: 02/06/2026</span>
+                        </div>
+                        <div class="flex gap-0.5 text-brand-accent text-[13px]">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                class="ph-fill ph-star-half"></i>
+                        </div>
+                    </div>
+                    <p class="text-[13px] text-brand-body font-light leading-[1.7]">"Amazing distillery tour! I've
+                        visited many distilleries around the world, but the way HaLong Rum incorporates local Vietnamese
+                        ingredients is unique. The copper stills are beautiful. Highly recommend if you visit Ha Long."
+                    </p>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-brand-black/40 p-5 rounded border border-brand-green/20">
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h4 class="text-brand-cream font-medium text-[14px]">Lê Phương Thảo</h4>
+                                <span
+                                    class="flex items-center gap-1 text-[9px] text-brand-accent border border-brand-accent/50 px-1.5 py-0.5 rounded uppercase tracking-wider">
+                                    <i class="ph-fill ph-seal-check"></i> Đã xác thực
+                                </span>
+                            </div>
+                            <span class="text-brand-body/60 text-[11px]">Tham gia ngày: 28/05/2026</span>
+                        </div>
+                        <div class="flex gap-0.5 text-brand-accent text-[13px]">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                class="ph-fill ph-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-[13px] text-brand-body font-light leading-[1.7]">"Quà tặng ly tasting mang về rất
+                        xinh. Vợ chồng mình đã có một buổi chiều rất chill tại nhà máy. Bạn nào đến Hạ Long ngoài đi
+                        vịnh thì nên ghé đây để đổi gió nhé, dịch vụ cực kỳ chỉn chu!"</p>
+                </div>
+
+                <!-- Review 4 -->
+                <div class="bg-brand-black/40 p-5 rounded border border-brand-green/20">
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h4 class="text-brand-cream font-medium text-[14px]">Trần Minh Hải</h4>
+                                <span
+                                    class="flex items-center gap-1 text-[9px] text-brand-accent border border-brand-accent/50 px-1.5 py-0.5 rounded uppercase tracking-wider">
+                                    <i class="ph-fill ph-seal-check"></i> Đã xác thực
+                                </span>
+                            </div>
+                            <span class="text-brand-body/60 text-[11px]">Tham gia ngày: 10/05/2026</span>
+                        </div>
+                        <div class="flex gap-0.5 text-brand-accent text-[13px]">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                class="ph-fill ph-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-[13px] text-brand-body font-light leading-[1.7]">"Mình đi tour ca chiều muộn, lúc thử
+                        rượu đúng lúc hoàng hôn xuống siêu đẹp. Rượu ngon, quy trình làm chuyên nghiệp không kém gì các
+                        nhà máy ở nước ngoài."</p>
+                </div>
+
+                <!-- Review 5 -->
+                <div class="bg-brand-black/40 p-5 rounded border border-brand-green/20">
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h4 class="text-brand-cream font-medium text-[14px]">Hoàng Anh</h4>
+                                <span
+                                    class="flex items-center gap-1 text-[9px] text-brand-accent border border-brand-accent/50 px-1.5 py-0.5 rounded uppercase tracking-wider">
+                                    <i class="ph-fill ph-seal-check"></i> Đã xác thực
+                                </span>
+                            </div>
+                            <span class="text-brand-body/60 text-[11px]">Tham gia ngày: 05/05/2026</span>
+                        </div>
+                        <div class="flex gap-0.5 text-brand-accent text-[13px]">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                                class="ph-fill ph-star-half"></i>
+                        </div>
+                    </div>
+                    <p class="text-[13px] text-brand-body font-light leading-[1.7]">"Hướng dẫn viên nhiệt tình. Hơi tiếc
+                        vì đi vào hôm nhà máy đang bảo trì một số máy móc nên không xem được lúc chưng cất trực tiếp,
+                        nhưng phần tasting bù lại rất tuyệt vời. Vote 4.5 sao."</p>
+                </div>
+
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-6 border-t border-brand-green/20 bg-[#121A10] rounded-b-lg">
+                <p class="text-[11px] text-center text-brand-body/70 italic">Hệ thống chỉ cho phép khách hàng đã mua và
+                    hoàn thành chuyến đi để lại đánh giá thông qua Email xác thực.</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Interactive Scripts -->
     <script>
         // --- VIEW MANAGEMENT SPA LOGIC ---
@@ -1074,6 +1271,26 @@
         function goHome() {
             showView('view-tour-detail');
         }
+
+        // --- MODAL REVIEWS LOGIC ---
+        function openReviewsModal() {
+            const modal = document.getElementById('reviewsModal');
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeReviewsModal() {
+            const modal = document.getElementById('reviewsModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto'; // Restore background scrolling
+        }
+
+        // Close modal when clicking outside the content
+        document.getElementById('reviewsModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeReviewsModal();
+            }
+        });
 
         // --- GLOBAL STATE DATA ---
         let bookingData = {
