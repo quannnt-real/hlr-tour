@@ -1,0 +1,12 @@
+# Ignore zip archive backups
+halong-tour-claude.zip
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# IDE settings
+.idea/
+.vscode/
+*.suo
+*.user

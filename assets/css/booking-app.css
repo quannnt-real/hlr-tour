@@ -1,0 +1,250 @@
+/* ===========================
+   HALONG TOUR - BOOKING APP CSS
+   =========================== */
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0B0C09;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1E2B1A;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #395327;
+}
+
+/* Input dark style */
+.input-dark {
+    background-color: rgba(11, 12, 9, 0.5);
+    border: 1px solid rgba(176, 200, 160, 0.2);
+    color: #F0EBE1;
+    transition: all 0.3s ease;
+}
+
+.input-dark:focus {
+    border-color: #C6A96B;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(198, 169, 107, 0.15);
+}
+
+/* Accordion transition */
+.accordion-content {
+    transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+    overflow: hidden;
+}
+
+/* Calendar day */
+.calendar-day {
+    transition: all 0.2s ease;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #F0EBE1;
+}
+
+.calendar-day:hover:not(.disabled):not(.selected):not(.today) {
+    background-color: rgba(57, 83, 39, 0.4);
+    color: #F0EBE1;
+}
+
+.calendar-day.selected {
+    background-color: #C6A96B;
+    color: #0B0C09;
+    font-weight: 500;
+}
+
+.calendar-day.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.calendar-day.today {
+    border: 1px solid #C6A96B;
+    color: #C6A96B;
+    opacity: 0.8;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Time slot */
+.time-slot {
+    transition: all 0.2s ease;
+    border: 1px solid rgba(57, 83, 39, 0.5);
+    color: #F0EBE1;
+    padding: 0.5rem 0.75rem;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    background: transparent;
+}
+
+.time-slot:hover:not(.disabled) {
+    border-color: #C6A96B;
+    color: #C6A96B;
+}
+
+.time-slot.selected {
+    background-color: #C6A96B;
+    color: #0B0C09;
+    border-color: #C6A96B;
+    font-weight: 500;
+}
+
+.time-slot.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+/* SPA view transitions */
+.view-section {
+    display: none;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.view-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Modal overlay */
+.modal-overlay {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    transform: translateY(20px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-overlay.show .modal-content {
+    transform: translateY(0) scale(1);
+}
+
+/* Age verification modal (18+ popup) */
+.age-verify-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(11, 12, 9, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    backdrop-filter: blur(4px);
+}
+
+.age-verify-overlay.hidden {
+    display: none;
+}
+
+.age-verify-box {
+    background: #1E2B1A;
+    border: 1px solid rgba(198, 169, 107, 0.4);
+    padding: 3rem 2rem;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Loading spinner */
+.hlr-spinner {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(11, 12, 9, 0.3);
+    border-top-color: #0B0C09;
+    border-radius: 50%;
+    animation: hlr-spin 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+@keyframes hlr-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Copy button success state */
+.copy-btn.copied {
+    color: #4ade80;
+}
+
+/* VAT tax lookup indicator */
+.vat-loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.vat-success-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: #4ade80;
+    margin-top: 4px;
+}
+
+/* Alert / notification inline */
+.hlr-alert {
+    padding: 12px 16px;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-top: 12px;
+}
+
+.hlr-alert.error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+}
+
+.hlr-alert.success {
+    background: rgba(74, 222, 128, 0.1);
+    border: 1px solid rgba(74, 222, 128, 0.3);
+    color: #4ade80;
+}
+
+.hlr-alert.warning {
+    background: rgba(198, 169, 107, 0.1);
+    border: 1px solid rgba(198, 169, 107, 0.3);
+    color: #C6A96B;
+}
+
+/* Responsive tweaks for booking widget */
+@media (max-width: 640px) {
+    .age-verify-box {
+        padding: 2rem 1.25rem;
+    }
+}
